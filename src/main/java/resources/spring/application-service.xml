@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx = "http://www.springframework.org/schema/tx"
+       xmlns:aop = "http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+        <!--扫描service dao 包-->
+        <context:component-scan base-package="com.it.service" />
+
+        <!--事务 service 创建事务管理器 定义增强 切面-->
+
+        <!--定义事务管理器-->
+        <bean name="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource" ></property>
+        </bean>
+
+        <!--定义增强类-->
+        <tx:advice id="adv" transaction-manager="txManager">
+            <tx:attributes>
+                <!-- 传播行为 -->
+                <tx:method name="save*" propagation="REQUIRED" />
+                <tx:method name="insert*" propagation="REQUIRED" />
+                <tx:method name="add*" propagation="REQUIRED" />
+                <tx:method name="create*" propagation="REQUIRED" />
+                <tx:method name="delete*" propagation="REQUIRED" />
+                <tx:method name="update*" propagation="REQUIRED" />
+                <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+                <tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+                <tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+            </tx:attributes>
+        </tx:advice>
+
+        <!--定义切面-->
+        <aop:config>
+            <aop:pointcut id="pc" expression="execution(* com..impl.*ServiceImpl.*(..))"></aop:pointcut>
+            <aop:advisor advice-ref="adv" pointcut-ref="pc"></aop:advisor>
+        </aop:config>
+
+
+
+</beans>
