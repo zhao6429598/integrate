@@ -1,0 +1,85 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+.layui-this {
+    background-color: #C2BE9E;
+    border: #0C0C0C solid 1px;
+}
+
+.container {
+    flex-flow: column;
+    display: flex;
+    min-height: 100%; /* 至少撑满屏幕，万一文章内容比较长也可自动延伸 */
+    margin-top: 0;
+    margin-bottom: 0; /* 页面开始已经100%，margin 会导致初始状态即超出屏幕 */
+    padding-top: 0;
+    padding-bottom: 0; /* 这两条根据盒模型取舍，我司该处是 standard mode，同 margin 理由设为0 */
+    overflow-y: scroll;
+}
+
+#head {
+    height: 50px;
+}
+
+#content {
+    flex: 1;
+}
+
+
+#left {
+    height: 100%;
+    border-right: #2E2D3C solid 0.5px;
+}
+
+#right {
+    height: 100%;
+}
+
+.layui-tab {
+    flex-flow: column;
+    display: flex;
+    min-height: 100%; /* 至少撑满屏幕，万一文章内容比较长也可自动延伸 */
+    margin-top: 0;
+    margin-bottom: 0; /* 页面开始已经100%，margin 会导致初始状态即超出屏幕 */
+    padding-top: 0;
+    padding-bottom: 0; /* 这两条根据盒模型取舍，我司该处是 standard mode，同 margin 理由设为0 */
+    overflow-y: scroll;
+}
+
+
+.mbx {
+    height: 30px;
+}
+
+.layui-tab-content {
+    flex: 1px;
+    padding: 0px;
+}
+
+.layui-show {
+    height: 100%;
+}
+
+
+/*右侧分上下两部分！上部分使用导航条 下部分显示内容*/
+
+
+#footer {
+    height: 50px;
+}
+
+#mengban {
+    position: absolute;
+    visibility: hidden;
+    z-index: 2;
+    width: 100%;
+    height: 120%;
+    filter: alpha(Opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 100;
+    background-color: gray;
+}
